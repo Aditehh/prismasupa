@@ -5,7 +5,7 @@ export default async function Home() {
 
   return (
     <main style={{ padding: 20 }}>
-      <h1>Posts</h1>
+      <h1>Posts in the database</h1>
 
       <ul>
         {posts.map((p) => (
