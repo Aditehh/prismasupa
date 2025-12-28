@@ -10,8 +10,10 @@ export async function createPost(formData: FormData) {
             slug: (formData.get("title") as string)
                 .replace(/\s+/g, "-")
                 .toLocaleLowerCase(),
-            content: formData.get("content") as string
+            content: formData.get("content") as string,
+
         },
+        include: { author: true }
     })
 
     revalidatePath("/posts");
