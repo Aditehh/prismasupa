@@ -6,7 +6,7 @@ export default async function Home() {
 
   return (
     <main style={{ padding: 20 }}>
-      <h1>Posts in the database</h1>
+      <h1>Posts in the database ({posts.length})</h1>
 
       <ul className="pt-20">
         {posts.map((p) => (
