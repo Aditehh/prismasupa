@@ -11,7 +11,7 @@ export default async function Home() {
       <ul className="pt-20">
         {posts.map((p) => (
           <li key={p.id}>
-            <Link href={`/posts/${p.id}`}>
+            <Link href={`/posts/${p.slug}`}>
               {p.title}
             </Link>
             {/* <p>{p.content}</p> */}
