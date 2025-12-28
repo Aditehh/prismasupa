@@ -4,19 +4,24 @@ import { revalidatePath } from "next/cache"
 
 
 export async function createPost(formData: FormData) {
+    const defaultAuthor = await prisma.user.upsert({
+        where: { email: "system@prisma.com" },
+        update: {},
+        create: { email: "system@prisma.com", hashedPassword: "dummy" },
+    });
+
     await prisma.post.create({
         data: {
             title: formData.get("title") as string,
             slug: (formData.get("title") as string)
                 .replace(/\s+/g, "-")
-                .toLocaleLowerCase(),
+                .toLowerCase(),
             content: formData.get("content") as string,
-
+            authorId: defaultAuthor.id, // ✅ REQUIRED
         },
-        include: { author: true }
-    })
+        include: { author: true }, // ✅ this just returns the author
+    });
 
-    revalidatePath("/posts");
 }
 
 export async function editPost(formdata: FormData, slug: string) {
